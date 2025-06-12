@@ -6,11 +6,11 @@ import time
 
 # Initialize Reddit API
 reddit = praw.Reddit(
-    """Enter your client_id and client_secret """
-    
+    # Enter your client_id and client_secret
     client_id='CLIENT_ID',         
     client_secret='CLIENT_SECRET', 
-    user_agent='FakeNewsDetector/1.0'  
+    user_agent='FakeNewsDetector/1.0'
+)
 
 def extract_article_content(url):
     """Extract main text content from a news article URL"""
@@ -23,12 +23,12 @@ def extract_article_content(url):
         print(f"Error extracting content from {url}: {str(e)}")
         return None
 
-def get_reddit_news_data(num_posts=1000):
+def get_reddit_news_data(num_posts=10000):
     """
     Collect news data from multiple subreddits and
     Returns a DataFrame with columns: title, content, url
     """
-    subreddits = ['news', 'worldnews', 'politics', 'india']
+    subreddits = ['worldnews', 'politics', 'india', 'economics', 'technology', 'climate', 'health', 'entertainment', 'sports', 'space']
     posts_data = []
     
     print(f"Collecting {num_posts} news posts from Reddit ...")
@@ -74,7 +74,7 @@ def get_reddit_news_data(num_posts=1000):
 
 
 # Collect the data
-news_data = get_reddit_news_data(1000)
+news_data = get_reddit_news_data(10000)
 
 # Save to CSV
 news_data.to_csv('reddit_news.csv', index=False)
